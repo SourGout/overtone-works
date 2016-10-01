@@ -2,10 +2,12 @@
   (:use overtone.live)
   (:require [otworks.functions :refer [get-samples gen-inst]]))
 
-(get-samples "~/Code/overtone-works/samples/" ["s1" "s2"])
+(get-samples "~/Code/overtone-works/samples/" ["s1" "s2" "s3"])
 
 (gen-inst "tri" ["free-verb" "lf-tri"])
 (gen-inst "smplr" ["free-verb" "lpf" "warp1-lfo"])
+
+
 
 
 (definst warp
@@ -17,6 +19,7 @@
     (* src amp)))
 
 
+
 (definst warplfo
   [buf 0 point 1 fs 1 ws 10 ebn -1 overlaps 1 wrr 0.0 interp 1 amp 1 att 1 rel 1]
   (let [src
@@ -26,7 +29,14 @@
     (* src amp)))
 
 
-(def warpl1 (warp s2 :fs 1 :ws 6 :interp 2 :buf 1 :att 3 :rel 1))
+
+(def warpl1 (warplfo s3  :ws 10 :interp 4 :att 3 :rel 1))
+
+(def warpl2 (warplfo s2 :ws 5 :interp 4 :att 1 :rel 2))
+
+(ctl warpl2 :amp 1.5 :fs 2)
+
+(stop)
 
 
 ;; (odoc sin-osc)
