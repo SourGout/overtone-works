@@ -3,6 +3,7 @@
    [clojure.string :as s]
    [overtone.core :refer [load-sample]]))
 
+
 (defn get-samples [folder-path filenames]
   (doseq [filename filenames]
     (intern *ns* (symbol filename) (load-sample (str folder-path filename ".wav")))))
