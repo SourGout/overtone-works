@@ -1,34 +1,18 @@
-(def sample-path "~/Producing/April5th-2016/samples/")
-(defn get-sample [path]
-  (sample (str sample-path path ".wav")))
-(def one (get-sample "1"))
-(def two (get-sample "2"))
+(ns otworks.c1
+  (:use overtone.live)
+  (:require [otworks.functions :refer [get-samples gen-inst]]))
 
-(definst pbv [buf 0 rate 1 amp 1 att 10 mix 1 room 1 damp 1 gate 1]
-  (let [src(* (free-verb :in (play-buf :num-channels 1 :bufnum buf :rate rate :trigger 1.0 :start-pos 0.0 :loop 1.0 :action 1) :mix mix :room room :damp damp)
-              (env-gen (asr :attack att :curve 1 :release 20) :gate gate :action FREE))]
-    (* src amp)))
+(get-samples "~/Code/overtone-works/samples" ["s1" "s2"])
 
-(pbv one :amp 1.0) ;;38
-(pbv one :rate 0.5 :amp 1.5 :attack 15 :release 40) ;;39
-(ctl 38 :rate 0.8)
-(ctl 38 :rate 0.4)
-(pbv two :rate 1.2 :amp 2) ;;40
-(ctl 39 :rate 0.6)
-(ctl 38 :rate 0.8)
-(ctl 40 :rate 1.8)
-(ctl 39 :rate 0.4)
-(ctl 40 :rate 1.775)
-(ctl 38 :rate 22.8)
-(ctl 38 :rate 45.6)
-(ctl 38 :rate 3.2)
-(ctl 38 :rate 1.6)
-(ctl 38 :rate 0.4)
-(ctl 40 :rate 1.8)
-(ctl 40 :gate 0)
-(ctl 38 :gate 0)
-(ctl 39 :gate 0)
+(gen-inst "tri" ["free-verb" "lf-tri"])
+(gen-inst "smplr" ["free-verb" "lpf" "warp1-lfo"])
 
-(stop)
+(def tri2 (tri :freq 72 :amp 0.4 :att 20))
 
-(pp-node-tree)
+(ctl tri2 :freq 59)
+
+(def s2-smplr (smplr s2 :pointer 2.3 :freq-scale 0.6 :window-size 13 :amp 0.9))
+
+(ctl s2-smplr :freq-scale 0.575 :window-size 4 :pointer 2.29)
+
+(ctl s2-smplr :gate 0)
