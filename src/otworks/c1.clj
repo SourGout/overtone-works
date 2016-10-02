@@ -30,9 +30,9 @@
 
 (def warpl2 (warplfo s2 :ws 5 :interp 4 :att 1 :rel 2))
 
-(ctl warpl2 :amp 0 :fs 2)
+(ctl warpl2 :amp 1 :fs 2)
 
-(ctl warpl1 :amp 0.5 :ws 20 :fs 2)
+(ctl warpl1 :amp 1 :ws 20 :fs 2)
 
 
 (stop)
