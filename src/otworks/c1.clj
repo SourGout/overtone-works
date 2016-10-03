@@ -26,21 +26,19 @@
     (* src amp)))
 
 
-(def warpl1 (warplfo s3 :ws 10 :interp 4 :att 3 :rel 1))
+(def warpl1 (warplfo s1 :ws 1 :interp 4 :att 0 :rel 0 :wrr 4))
 
-(def warpl2 (warplfo s2 :ws 5 :interp 4 :att 1 :rel 2))
+(def warpl2 (warplfo s1 :ws 4 :fs 2 :interp 4 :att 1 :rel 2 :wrr 1))
 
-(ctl warpl2 :amp 1 :fs 2)
+(def warpl3 (warplfo s3 :ws 7 :interp 2 :att 0.6 :rel 5 :wrr 2))
+
+(ctl warpl3 :amp 1.5 :fs 2)
 
 (ctl warpl1 :amp 1 :ws 20 :fs 2)
 
+(ctl warpl2 :amp 2 :ws 10 :fs 1)
 
 (stop)
-
-
-;; (odoc sin-osc)
-
-;; (odoc free-verb)
 
 ;; (definst sinsynth
 ;;   [freq 440 amp 1]
@@ -51,9 +49,9 @@
 ;; (def sinsynth1 (sinsynth :freq 220 :amp 0.5))
 ;; (ctl sinsynth1 :freq 480 :amp 0.7)
 
-;; (definst sinsynth2
+;; (definst sinsynth2                      
 ;;   [freq 440 amp 1 mix 1 room 0.8 damp 0.6]
-;;   (* (free-verb
+;;    (* (free-verb
 ;;       :in (sin-osc freq)
 ;;       :mix mix :room room :damp damp)
-;;      amp))
+;;       amp))
