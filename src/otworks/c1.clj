@@ -2,7 +2,7 @@
   (:use overtone.live)
   (:require [otworks.functions :refer [get-samples gen-inst]]))
 
-(get-samples "~/Code/overtone-works/samples/" ["s1" "s2" "s3"])
+(get-samples "~/Code/overtone-works/samples/" ["s1" "s2" "s3" "s4" "s5"])
 
 (gen-inst "tri" ["free-verb" "lf-tri"])
 (gen-inst "smplr" ["free-verb" "lpf" "warp1-lfo"])
@@ -26,19 +26,21 @@
     (* src amp)))
 
 
-(def warpl1 (warplfo s1 :ws 1 :interp 4 :att 0 :rel 5 :wrr 4))
+(def warpl (warplfo s5 :ws 1 :interp 1 :att 1 :fs -1 :rel 5 :overlaps 5))
 
-(def warpl2 (warplfo s1 :ws 4 :fs 2 :interp 4 :att 1 :rel 2 :wrr 1))
+(def warpl2 (warplfo s4 :ws 0.05 :fs 5 :interp 4 :att 1 :rel 2 :wrr 1))
 
-(def warpl3 (warplfo s1 :ws 7 :interp 2 :att 0.6 :rel 5 :wrr 2))
+(def warpl3 (warplfo s5 :ws 0.1 :interp 2 :att 0.6 :rel 5 :fs 1.5 :pointer 1.2))
 
-(ctl warpl3 :amp 1.5 :fs 2)
+(ctl warpl3 :amp 1.5 :fs -1.5)
 
-(ctl warpl1 :amp 1 :ws 20 :fs 2 :freq 4)
+(ctl warpl3 :fs 1.5)
 
-(ctl warpl2 :amp 2 :ws 10 :fs 1)
+(ctl warpl :amp 1 :ws 0.6 :fs -0.5)
 
-(ctl warpl1 :gate 0)
+(ctl warpl2 :amp 2 :ws 5 :fs 1.1 :rel 1 :wrr 2) 
+
+(ctl warpl :gate 0)
 
 (ctl warpl2 :gate 0)
 
